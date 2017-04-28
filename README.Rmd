@@ -1,0 +1,144 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# statfitools
+
+The `statfitools` is a collection of functions to help working with a data from
+[Statistics Finland](http://tilastokeskus.fi). I have writen functions for my
+own use, but I am happy if someone else finds functions useful.
+Some of the functions are spesific to
+the data from Statistics Finland, others have more general use.
+
+To download the data from the Statistics Finland 
+use [pxweb](https://github.com/rOpenGov/pxweb).
+
+
+## Installation
+
+To install the package:
+
+```{r install, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("jhuovari/statfitools")
+```
+
+
+## Usage
+
+```{r init, message=FALSE}
+library("statfitools")
+library("dplyr")
+
+```
+
+### Preprocess data
+
+#### Make legal names
+
+Try to make more readable valid names than `make.names()`
+
+* `make_names()` to pass a strings. 
+* `clean_names()` to pass a data.frame or other objects with names to change.
+
+```{r clean_names}
+
+# install.packages("pxweb")
+
+dat <- pxweb::get_pxweb_data(
+  url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/010_tyokay_tau_101.px",
+  dims = list(
+    Alue = c('SSS'),
+    "Pääasiallinen toiminta" = c('*'),
+    Sukupuoli = c('S'),
+    "Ikä" = c('SSS'),
+    Vuosi = c('*')),
+  clean = TRUE)
+
+names(dat)
+
+dat <- clean_names(dat)
+
+names(dat)
+```
+
+#### Extract code or name from a code-name string
+
+```{r extract}
+
+extract_code("508 Mantta-Vilppula")
+extract_name("508 Mantta-Vilppula")
+
+```
+
+
+### Work with classifications
+
+* `sf_get_class()` to download statistical classifications from the Statistics Finland.
+* `sf_test_class()` to test statistical classifications from the Statistics Finland.
+* `sf_recode()`, `sf_name2code()` and `sf_code2name()` for recoding classifications
+
+### Work with a statfi regional data 
+
+
+#### Clean regional names
+Statistics Finland uses different formats to present regional names. Make them uniform.
+
+TODO
+
+#### Recode and aggregate regional data
+
+Available municipality based regional classifications from Statistics Finland.
+
+```{r}
+
+names(sf_get_reg_keytable(NULL))
+
+```
+
+Aggregate to Tilastollinen kuntaryhmitys.
+
+Download classification key and data.
+Join and aggregate
+
+```{r recode}
+
+# Classification key
+key_kuntar <- sf_get_reg_keytable("Kuntaryhmä")
+
+# Data
+dat_ku <- pxweb::get_pxweb_data(
+  url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/010_tyokay_tau_101.px",
+  dims = list(
+    Alue = c('*'),
+    "Pääasiallinen toiminta" = c('11'),  # Työlliset
+    Sukupuoli = c('S'),
+    "Ikä" = c('SSS'),
+    Vuosi = c('*')),
+  clean = TRUE) %>% 
+  clean_names() %>% 
+  clean_times()
+
+# Join and aggregate
+dat_kuntar <- dat_ku %>% 
+  # safer to use codes
+  mutate(ku_code = sf_name2code(Alue, class = "kunta", year = 2016)) %>%   
+  left_join(key_kuntar, by = c(ku_code = "Knro")) %>% 
+  group_by(Kuntaryhma, time, Paaasiallinen_toiminta) %>% 
+  summarise(values = sum(values, na.rm = TRUE)) %>% 
+  ungroup()
+
+```
+

@@ -1,0 +1,23 @@
+Kunta	Keskusryhma
+Rovaniemi	Keskus - yliopisto
+Oulu	Keskus - yliopisto
+Vaasa	Keskus - yliopisto
+Jyväskylä	Keskus - yliopisto
+Joensuu	Keskus - yliopisto
+Kuopio	Keskus - yliopisto
+Lappeenranta	Keskus - yliopisto
+Tampere	Keskus - yliopisto
+Turku	Keskus - yliopisto
+Maarianhamina	Keskus - muut
+Kajaani	Keskus - muut
+Kokkola	Keskus - muut
+Seinäjoki	Keskus - muut
+Mikkeli	Keskus - muut
+Kotka	Keskus - muut
+Lahti	Keskus - muut
+Hämeenlinna	Keskus - muut
+Pori	Keskus - muut
+Helsinki	Pääkaupunkiseutu
+Espoo	Pääkaupunkiseutu
+Vantaa	Pääkaupunkiseutu
+Kauniainen	Pääkaupunkiseutu
