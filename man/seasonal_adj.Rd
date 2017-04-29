@@ -6,7 +6,7 @@
 \alias{trend_series}
 \title{Easy and error-resistant wrap-up for seasonal adjustment}
 \usage{
-seasonal_adj(x, time, ..., series = "sa")
+seasonal_adj(x, time, series = "sa", outlier.types = "ao", ...)
 
 sa_series(x, time, ...)
 
@@ -17,10 +17,14 @@ trend_series(x, time, ...)
 
 \item{time}{a date vector.}
 
-\item{...}{parameters passed to \code{\link[seasonal]{seas}}.}
-
 \item{series}{a series to return. "sa" for seasonal adjusted and "trend"
 for trend.}
+
+\item{outlier.types}{an outlier parameter passed to
+\code{\link[seasonal]{seas}}. Default "ao", only additive outliers
+differs from \code{seas} default.}
+
+\item{...}{parameters passed to \code{\link[seasonal]{seas}}.}
 }
 \description{
 Seasonal adjustment using \code{\link[seasonal]{seasonal-package}}. Functions
