@@ -20,6 +20,9 @@ output_ind <-
 
 devtools::use_data(output_ind, overwrite = TRUE)
 
+
+# Keskuskunnat
+
 keskuskunnat <- readr::read_tsv("data-raw/Keskuskunnat.txt", col_types = readr::cols(
   Kunta = readr::col_character(),
   Keskusryhma = readr::col_character()
@@ -38,3 +41,12 @@ keskuskuntaryhma_key <- key_kuntar %>%
 devtools::use_data(keskuskuntaryhma_key, overwrite = TRUE)
 
 write.csv2(keskuskuntaryhma_key, file = "data-raw/Keskuskuntaryhma_key.csv")
+
+
+# Maakunnat pitka
+#  esim Uudenmaan maakunta
+
+mk_pitka_key <- readr::read_csv2("data-raw/Maakunnat_pitka.csv",
+  col_types = "ccc")
+
+devtools::use_data(mk_pitka_key, overwrite = TRUE)

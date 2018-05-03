@@ -42,8 +42,5 @@ Intended specially to use in pipe with \code{\link[dplyr]{mutate}}.
 }}
 
 \examples{
-org <- AirPassengers \%>\%
-  tibble(time = lubridate::date_decimal(as.numeric(time(.))), values = .)
-
-y <- sa_series(x = org$values, time = org$time)
+y <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers))
 }

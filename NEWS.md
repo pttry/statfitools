@@ -1,5 +1,19 @@
+# statfitools 0.3.4
 
-# statfitools 0.3.2.9000
+* Fix `clean_times` for quarterly and monthly data, again.
+
+# statfitools 0.3.4
+
+* A new function `fp` to calculate a fixed prices serie from current and 
+  previous year´s prices series.
+* Added key-table `mk_pitka_key` for long name for maakunta ("Uudenmaan maakunta").
+* Updated vignette for new StatFin links.
+TODO: 
+- Document data
+- Function to use data?
+
+
+# statfitools 0.3.3
 
 * Fix `clean_times` for quarterly and monthly data.
 * A new argument to `to_lower` for `make_names` and `clean_names` to turn 

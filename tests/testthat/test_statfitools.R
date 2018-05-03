@@ -34,6 +34,8 @@ test_that("get_class functions return data.frame",{
 
 context("clean")
 
+
+
 test_that("clean_times return right",{
   expect_is(clean_times(output_ind, time_format = "date")$time, "Date")
   expect_is(clean_times(public_debt)$time, "numeric")
@@ -43,5 +45,22 @@ test_that("clean_times return right",{
     "Date")
   expect_false(
     any(is.na(clean_times(employment_q, sub_year_col = "Ajanjakso", agg_time = "Vuosikeskiarvo")$time))
+    )
+})
+
+test_that("clean_times dates difference a month",{
+  # test data
+  dat_palkkasumma0 <-
+    pxweb::get_pxweb_data(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/pal/ktps/statfin_ktps_pxt_001_fi.px",
+                          dims = list(Vuosi = c('2016', '2017'),
+                                      Ajanjakso = c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'),
+                                      Toimiala = c('02385'),
+                                      Sarja = c('Trendi', 'Kausitasoitettu')),
+                          clean = TRUE)
+
+  expect_true(all(diff(
+    filter(clean_times(dat_palkkasumma0,
+                       sub_year_col = "Ajanjakso"),
+           Sarja == "Trendisarja")$time) %in% c(28, 29, 30, 31))
     )
 })

@@ -45,12 +45,8 @@ clean_times <- function(x, time_format = NULL,
   } else {
 
 
-
-    subs <- if(is.factor(x[[sub_year_col]])){
-        levels(x[[sub_year_col]])
-      } else {
-        unique(x[[sub_year_col]])
-      }
+    # get months or quarters
+    subs <- unique(x[[sub_year_col]])
 
     # remove aggregate time value. Quarterly and monthly allowed
     subs <- setdiff(subs, agg_time)

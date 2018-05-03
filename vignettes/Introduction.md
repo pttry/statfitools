@@ -39,14 +39,13 @@ Get data from the Statistics Finland and clean variable names and time variable.
 
 ```r
 dat_ku <- pxweb::get_pxweb_data(
-  url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/010_tyokay_tau_101.px",
-  dims = list(
-    Alue = c('*'),
-    "Pääasiallinen toiminta" = c('11'),  # Työlliset
-    Sukupuoli = c('S'),
-    "Ikä" = c('SSS'),
-    Vuosi = c('*')),
-  clean = TRUE) %>% 
+    url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_001.px",
+    dims = list(Alue = c('*'),
+               "Pääasiallinen toiminta" = c('11'),
+               Sukupuoli = c('S'),
+               "Ikä" = c('SSS'),
+               Vuosi = c('*')),
+    clean = TRUE) %>% 
   clean_names() %>% 
   clean_times()
 ```
@@ -68,8 +67,8 @@ dat_keskuskunta <- dat_ku %>%
 ```
 
 ```
-## Warning in left_join_impl(x, y, by$x, by$y, suffix$x, suffix$y): joining
-## factors with different levels, coercing to character vector
+## Warning: Column `ku_code`/`Knro` joining factors with different levels,
+## coercing to character vector
 ```
 
 Plot the data. Groups are ordered based on last value.
