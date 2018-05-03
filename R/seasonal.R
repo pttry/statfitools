@@ -25,10 +25,10 @@ seasonal_adj <- function(x, time, series = "sa", outlier.types = "ao", ...){
   freq <- 1/lubridate:: time_length(
     lubridate::interval(time[1], time[2]), unit = "year")
   freq <- round(freq)
-  x_ts <- ts(x, lubridate::year(time[1]), frequency = freq)
+  x_ts <- stats::ts(x, lubridate::year(time[1]), frequency = freq)
 
   y <- try(seasonal::seas(x_ts, ..., outlier.types = outlier.types,
-                          na.action = na.exclude), silent = TRUE)
+                          na.action = stats::na.exclude), silent = TRUE)
 
   #If fails..
   if (inherits(y, "try-error")){
