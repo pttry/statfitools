@@ -2,6 +2,7 @@
 
 * Fix `clean_times` for quarterly and monthly data, again.
 * A new argument rename_values to `clean_names` to rename last columns of data.frame as "values".
+* `clean_times` now adds time column to previous position of year column.
 
 # statfitools 0.3.4
 

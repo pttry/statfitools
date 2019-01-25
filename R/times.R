@@ -30,15 +30,16 @@ clean_times <- function(x, time_format = NULL,
   # Only yearly
   if (length(sub_year_col) == 0){
     if (is.null(time_format) || time_format == "num"){
-      x$time <- readr::parse_number(as.character(x[[year_col]]))
+      time <- readr::parse_number(as.character(x[[year_col]]))
     } else if (time_format == "date"){
-      x$time <- as.Date(
+      time <- as.Date(
         paste0(readr::parse_number(as.character(x[[year_col]])), "-01-01"))
     } else {
       stop("Unknown time_format ", time_format)
     }
 
-    x[, year_col] <- NULL
+    x <- rename(x, time = year_col)
+    x$time <- time
     return(x)
 
   # mounthly or quertely
@@ -60,18 +61,20 @@ clean_times <- function(x, time_format = NULL,
     mounths <- seq.int(1, by = 12/length(subs), length.out = length(subs))
 
     if (is.null(time_format) || time_format == "date"){
-      x$time <- as.Date(
+      time <- as.Date(
         paste0(readr::parse_number(as.character(x[[year_col]])), "-",
                mounths[match(x[[sub_year_col]], subs)] , "-1"))
 
     } else if (time_format == "num") {
-      x$time <- readr::parse_number(as.character(x[[year_col]])) +
+      time <- readr::parse_number(as.character(x[[year_col]])) +
         (match(x[[sub_year_col]], subs) - 1) * 1/length(subs)
     } else {
       stop("Unknown time_format ", time_format)
     }
-    x[, year_col] <- NULL
+
     x[, sub_year_col] <- NULL
+    x <- rename(x, time = year_col)
+    x$time <- time
     return(x)
   }
 
