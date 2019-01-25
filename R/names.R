@@ -10,6 +10,7 @@
 #'
 #' @param x a character vector (of factor) with names to change
 #' @param to_lower a locigal whether to turn names to lower case.
+#' @param rename_values a locigal whether to rename last column (values column) as "values".
 #' @param ... Arguments passed to \code{\link{make.names}}.
 #' @return a character vector (or factor).
 #' @export
@@ -17,7 +18,7 @@
 #'   make_names(c("M\u00E4\u00E4r\u00E4", "Regional code"))
 #'   make_names("Hello, world!")
 
-make_names <- function (x, to_lower = FALSE, ...) {
+make_names <- function (x, to_lower = FALSE, rename_values = FALSE, ...) {
 
   if (is.factor(x)){
     levels(x) <- make_names(levels(x))
@@ -40,6 +41,7 @@ make_names <- function (x, to_lower = FALSE, ...) {
     x <- make.names(x, ...)
 
     if (to_lower) x <- tolower(x)
+    if (rename_values) x[length(x)] <- "values"
 
     x
   }
@@ -53,13 +55,14 @@ make_names <- function (x, to_lower = FALSE, ...) {
 #'
 #' @param x an object with names to change.
 #' @param to_lower a locigal whether to turn names to lower case.
+#' @param rename_values a locigal whether to rename last column (values column) as "values".
 #' @return an object.
 #' @export
 #' @examples
 #'    x <- data.frame("col 1!" = c(1,2), "col 2?" = c(2,4), check.names = FALSE)
 #'    names(clean_names(x))
-clean_names <- function(x, to_lower = FALSE){
-  names(x) <- make_names(names(x), to_lower = to_lower, unique = TRUE)
+clean_names <- function(x, to_lower = FALSE, rename_values = FALSE){
+  names(x) <- make_names(names(x), to_lower = to_lower, rename_values = rename_values, unique = TRUE)
   x
 }
 

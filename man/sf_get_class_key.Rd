@@ -32,3 +32,4 @@ y <- sf_get_class_key("tyossakayntial", 2016)
 Other sf_class: \code{\link{sf_get_class}},
   \code{\link{sf_get_reg_key}}
 }
+\concept{sf_class}

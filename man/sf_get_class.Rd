@@ -56,3 +56,4 @@ t <- sf_get_class("toimiala", 2008, lang = "en")
 Other sf_class: \code{\link{sf_get_class_key}},
   \code{\link{sf_get_reg_key}}
 }
+\concept{sf_class}

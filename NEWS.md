@@ -1,6 +1,7 @@
 # statfitools 0.3.4
 
 * Fix `clean_times` for quarterly and monthly data, again.
+* A new argument rename_values to `clean_names` to rename last columns of data.frame as "values".
 
 # statfitools 0.3.4
 

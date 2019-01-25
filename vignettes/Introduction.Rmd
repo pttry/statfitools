@@ -32,7 +32,7 @@ dat_ku <- pxweb::get_pxweb_data(
     dims = list(Alue = c('*'),
                "Pääasiallinen toiminta" = c('11'),
                Sukupuoli = c('S'),
-               "Ikä" = c('SSS'),
+               "Ikä" = c('sss'),
                Vuosi = c('*')),
     clean = TRUE) %>% 
   clean_names() %>% 
