@@ -7,15 +7,19 @@ library(forcats)
 
 ## ----data----------------------------------------------------------------
 
-dat_ku <- pxweb::get_pxweb_data(
-    url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_001.px",
-    dims = list(Alue = c('*'),
+# 115b -- Väestö alueen, pääasiallisen toiminnan, sukupuolen, iän ja vuoden mukaan, 1987-2017
+
+pxweb::pxweb_get("http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px")
+
+dat_ku <- pxweb::pxweb_get_data(
+    url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px",
+    query = list(Tiedot = c("lkm"),
+                 Alue = c('*'),
                "Pääasiallinen toiminta" = c('11'),
-               Sukupuoli = c('S'),
+               Sukupuoli = c('SSS'),
                "Ikä" = c('SSS'),
-               Vuosi = c('*')),
-    clean = TRUE) %>% 
-  clean_names() %>% 
+               Vuosi = c('*'))) %>% 
+  clean_names(rename_values = TRUE) %>% 
   clean_times()
 
 

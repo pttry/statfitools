@@ -1,6 +1,15 @@
-# Introduction to statfitools
-Janne Huovari  
-`r Sys.Date()`  
+---
+title: "Introduction to statfitools"
+author: "Janne Huovari"
+date: "2019-05-04"
+output: 
+  rmarkdown::html_vignette:
+    keep_md: true
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
 # Aggregate municipality data
 
@@ -31,6 +40,17 @@ library(dplyr)
 
 ```r
 library(ggplot2)
+```
+
+```
+## Registered S3 methods overwritten by 'ggplot2':
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang
+```
+
+```r
 library(forcats)
 ```
 
@@ -38,15 +58,33 @@ Get data from the Statistics Finland and clean variable names and time variable.
 
 
 ```r
-dat_ku <- pxweb::get_pxweb_data(
-    url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_001.px",
-    dims = list(Alue = c('*'),
+# 115b -- Väestö alueen, pääasiallisen toiminnan, sukupuolen, iän ja vuoden mukaan, 1987-2017
+
+pxweb::pxweb_get("http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px")
+```
+
+```
+## PXWEB METADATA
+## Väestö alueen, pääasiallisen toiminnan, sukupuolen, iän ja vuoden mukaan muuttujina Alue, Pääasiallinen toiminta, Sukupuoli, Ikä, Vuosi ja Tiedot 
+## variables:
+##  [[1]] Alue: Alue
+##  [[2]] Pääasiallinen toiminta: Pääasiallinen toiminta
+##  [[3]] Sukupuoli: Sukupuoli
+##  [[4]] Ikä: Ikä
+##  [[5]] Vuosi: Vuosi
+##  [[6]] Tiedot: Tiedot
+```
+
+```r
+dat_ku <- pxweb::pxweb_get_data(
+    url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px",
+    query = list(Tiedot = c("lkm"),
+                 Alue = c('*'),
                "Pääasiallinen toiminta" = c('11'),
-               Sukupuoli = c('S'),
+               Sukupuoli = c('SSS'),
                "Ikä" = c('SSS'),
-               Vuosi = c('*')),
-    clean = TRUE) %>% 
-  clean_names() %>% 
+               Vuosi = c('*'))) %>% 
+  clean_names(rename_values = TRUE) %>% 
   clean_times()
 ```
 

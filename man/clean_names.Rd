@@ -4,12 +4,14 @@
 \alias{clean_names}
 \title{Make syntactically valid names and reuturn an object}
 \usage{
-clean_names(x, to_lower = FALSE)
+clean_names(x, to_lower = FALSE, rename_values = FALSE)
 }
 \arguments{
 \item{x}{an object with names to change.}
 
 \item{to_lower}{a locigal whether to turn names to lower case.}
+
+\item{rename_values}{a locigal whether to rename last column (values column) as "values".}
 }
 \value{
 an object.

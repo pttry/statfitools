@@ -1,8 +1,9 @@
-# statfitools 0.3.4
+# statfitools 0.3.5
 
 * Fix `clean_times` for quarterly and monthly data, again.
 * A new argument rename_values to `clean_names` to rename last columns of data.frame as "values".
 * `clean_times` now adds time column to previous position of year column.
+* Fix vignette error due to change in Statistics Finland
 
 # statfitools 0.3.4
 
