@@ -1,3 +1,8 @@
+# statfitools 0.3.6
+
+* A new function `pp` to calculate a previous year's prices serie from current and 
+  constant price series.
+
 # statfitools 0.3.5
 
 * Fix `clean_times` for quarterly and monthly data, again.

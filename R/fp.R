@@ -19,3 +19,24 @@ fp <- function(cp, pp, time, year){
   y <- cp[time == year] * ind / ind[time == year]
   y
 }
+
+
+#' Calculate previous years price series
+#'
+#' For a yearly data calculates a serie in previous year's prices
+#' from fixed and current price series.
+#'
+#' @param cp a current price variable.
+#' @param fp a fixed year price variable.
+#' @param time a variable for years.
+#'
+#' @export
+#' @return an vector
+#'
+#' @examples
+#'   pp(c(100, 120), c(100, 110), time = c(1,2))
+#'
+pp <- function(cp, fp, time){
+  y <- lag(cp, order_by = time) * (fp/lag(fp, order_by = time))
+  y
+}
