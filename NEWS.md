@@ -1,3 +1,8 @@
+# statfitools 0.3.6.9000
+
+* Fix NA issue with `fp`.
+
+
 # statfitools 0.3.6
 
 * A new function `pp` to calculate a previous year's prices serie from current and 

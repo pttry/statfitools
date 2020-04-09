@@ -11,10 +11,13 @@
 #' @export
 #' @return an vector
 #'
+#' @examples
+#' fp(cp = c(1, 2, 3), pp = c(NA, NA, NA), time = c(2014,2015,2016), year = 2015)
+#' fp(cp = c(1, 2, 3), pp = c(1, 2, 4), time = c(2014,2015,2016), year = 2015)
 #'
 fp <- function(cp, pp, time, year){
   ind <- pp/lag(cp)
-  ind <- if_else(is.na(ind), 1, ind)
+  ind[1] <- 1
   ind <- cumprod(ind)
   y <- cp[time == year] * ind / ind[time == year]
   y
