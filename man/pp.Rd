@@ -20,3 +20,7 @@ an vector
 For a yearly data calculates a serie in previous year's prices
 from fixed and current price series.
 }
+\examples{
+  pp(c(100, 120), c(100, 110), time = c(1,2))
+
+}

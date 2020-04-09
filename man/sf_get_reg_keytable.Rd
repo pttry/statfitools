@@ -4,9 +4,12 @@
 \alias{sf_get_reg_keytable}
 \title{Get regional classification table from Statistics Finland}
 \usage{
-sf_get_reg_keytable(classes = NULL,
-  url = "http://www.tilastokeskus.fi/static/media/uploads/meta/luokitukset/kooste_2016_kaikki_kielet.xlsx",
-  as_factors = default.stringsAsFactors())
+sf_get_reg_keytable(
+  classes = NULL,
+ 
+    url = "http://www.tilastokeskus.fi/static/media/uploads/meta/luokitukset/kooste_2016_kaikki_kielet.xlsx",
+  as_factors = default.stringsAsFactors()
+)
 }
 \arguments{
 \item{classes}{a name or vector of names of the regional classification.

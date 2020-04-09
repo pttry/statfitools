@@ -4,8 +4,13 @@
 \alias{clean_times}
 \title{Convert Statfin time variable(s) to numeric or date}
 \usage{
-clean_times(x, time_format = NULL, year_col = "Vuosi",
-  sub_year_col = NULL, agg_time = NULL)
+clean_times(
+  x,
+  time_format = NULL,
+  year_col = "Vuosi",
+  sub_year_col = NULL,
+  agg_time = NULL
+)
 }
 \arguments{
 \item{x}{A data.frame.}

@@ -29,6 +29,6 @@ Modifications:
  * finnish with \code{\link{make.names}}
 }
 \examples{
-  make_names(c("M\\u00E4\\u00E4r\\u00E4", "Regional code"))
+  make_names(c("M\u00E4\u00E4r\u00E4", "Regional code"))
   make_names("Hello, world!")
 }

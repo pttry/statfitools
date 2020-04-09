@@ -4,8 +4,10 @@
 \alias{sf_get_ex_munic}
 \title{Download data.frame for abolished municipalities}
 \usage{
-
-  sf_get_ex_munic(url = "http://www.tilastokeskus.fi/meta/luokitukset/_linkki/lakkautetut_kunnat_aakkosissa_15.txt")
+sf_get_ex_munic(
+ 
+    url = "http://www.tilastokeskus.fi/meta/luokitukset/_linkki/lakkautetut_kunnat_aakkosissa_15.txt"
+)
 }
 \arguments{
 \item{url}{a url for text file in Statistics Finland web page.}

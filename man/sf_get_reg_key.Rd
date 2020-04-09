@@ -23,7 +23,8 @@ x <- sf_get_reg_key("maakunta", 2014)
 y <- sf_get_reg_key(to_reg = "skunta", year = 2013)
 }
 \seealso{
-Other sf_class: \code{\link{sf_get_class_key}},
-  \code{\link{sf_get_class}}
+Other sf_class: 
+\code{\link{sf_get_class_key}()},
+\code{\link{sf_get_class}()}
 }
 \concept{sf_class}

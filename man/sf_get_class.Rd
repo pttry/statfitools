@@ -4,8 +4,7 @@
 \alias{sf_get_class}
 \title{Download statistical classifications from the Statistics Finland.}
 \usage{
-sf_get_class(class, year, lang = "fi",
-  as_factors = default.stringsAsFactors())
+sf_get_class(class, year, lang = "fi", as_factors = default.stringsAsFactors())
 }
 \arguments{
 \item{class}{a a name of the classification.}
@@ -53,7 +52,8 @@ z <- sf_get_class("maakunta", 2016)
 t <- sf_get_class("toimiala", 2008, lang = "en")
 }
 \seealso{
-Other sf_class: \code{\link{sf_get_class_key}},
-  \code{\link{sf_get_reg_key}}
+Other sf_class: 
+\code{\link{sf_get_class_key}()},
+\code{\link{sf_get_reg_key}()}
 }
 \concept{sf_class}
