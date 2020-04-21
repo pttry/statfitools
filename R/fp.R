@@ -9,17 +9,26 @@
 #' @param year a numeric for a base year.
 #'
 #' @export
-#' @return an vector
+#' @return an vector.
 #'
 #' @examples
 #' fp(cp = c(1, 2, 3), pp = c(NA, NA, NA), time = c(2014,2015,2016), year = 2015)
 #' fp(cp = c(1, 2, 3), pp = c(1, 2, 4), time = c(2014,2015,2016), year = 2015)
+#' fp(cp = c(1, 2, 3), pp = c(NA, 2, 4), time = c(2014,2015,2016), year = 2015)
+#' fp(cp = c(NA, 2, 3), pp = c(NA, NA, 4), time = c(2014,2015,2016), year = 2015)
 #'
 fp <- function(cp, pp, time, year){
+  # index to remove leading NA
+  non_na_ind <- cumsum(!is.na(cp)) != 0
+  cp <- cp[non_na_ind]
+  pp <- pp[non_na_ind]
+  time <- time[non_na_ind]
   ind <- pp/lag(cp)
   ind[1] <- 1
   ind <- cumprod(ind)
-  y <- cp[time == year] * ind / ind[time == year]
+  y0 <- cp[time == year] * ind / ind[time == year]
+  y <- rep_len(NA, length(non_na_ind))
+  y[non_na_ind] <- y0
   y
 }
 

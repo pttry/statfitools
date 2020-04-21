@@ -1,6 +1,7 @@
-# statfitools 0.3.6.9000
+# statfitools 0.3.6.9001
 
 * Fix NA issue with `fp`.
+* fp works with leading NAs now.
 
 
 # statfitools 0.3.6

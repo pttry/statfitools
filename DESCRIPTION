@@ -1,6 +1,6 @@
 Package: statfitools
 Title: Helper Functions for Working with the Data from Statistics Finland
-Version: 0.3.6.9000
+Version: 0.3.6.9001
 Authors@R: person("Janne", "Huovari", email = "janne.huovari@ptt.fi", role = c("aut", "cre"))
 Description: Helper functions for working with data from Statistics Finland.
 URL: http://github.com/jhuovari/statfitools
@@ -21,7 +21,7 @@ License: GPL-3
 LazyData: true
 Suggests:
     knitr,
-    testthat,
+    testthat (>= 2.1.0),
     pxweb,
     rmarkdown,
     forcats,

@@ -25,5 +25,7 @@ price level for series in current prices and previous year's prices.
 \examples{
 fp(cp = c(1, 2, 3), pp = c(NA, NA, NA), time = c(2014,2015,2016), year = 2015)
 fp(cp = c(1, 2, 3), pp = c(1, 2, 4), time = c(2014,2015,2016), year = 2015)
+fp(cp = c(1, 2, 3), pp = c(NA, 2, 4), time = c(2014,2015,2016), year = 2015)
+fp(cp = c(NA, 2, 3), pp = c(NA, NA, 4), time = c(2014,2015,2016), year = 2015)
 
 }
