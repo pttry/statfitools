@@ -1,7 +1,7 @@
 ---
 title: "Introduction to statfitools"
 author: "Janne Huovari"
-date: "2019-05-04"
+date: "2020-05-04"
 output: 
   rmarkdown::html_vignette:
     keep_md: true
@@ -40,17 +40,6 @@ library(dplyr)
 
 ```r
 library(ggplot2)
-```
-
-```
-## Registered S3 methods overwritten by 'ggplot2':
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang
-```
-
-```r
 library(forcats)
 ```
 
@@ -60,25 +49,10 @@ Get data from the Statistics Finland and clean variable names and time variable.
 ```r
 # 115b -- Väestö alueen, pääasiallisen toiminnan, sukupuolen, iän ja vuoden mukaan, 1987-2017
 
-pxweb::pxweb_get("http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px")
-```
 
-```
-## PXWEB METADATA
-## Väestö alueen, pääasiallisen toiminnan, sukupuolen, iän ja vuoden mukaan muuttujina Alue, Pääasiallinen toiminta, Sukupuoli, Ikä, Vuosi ja Tiedot 
-## variables:
-##  [[1]] Alue: Alue
-##  [[2]] Pääasiallinen toiminta: Pääasiallinen toiminta
-##  [[3]] Sukupuoli: Sukupuoli
-##  [[4]] Ikä: Ikä
-##  [[5]] Vuosi: Vuosi
-##  [[6]] Tiedot: Tiedot
-```
-
-```r
 dat_ku <- pxweb::pxweb_get_data(
     url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px",
-    query = list(Tiedot = c("lkm"),
+    query = list(Tiedot = c("vaesto"),
                  Alue = c('*'),
                "Pääasiallinen toiminta" = c('11'),
                Sukupuoli = c('SSS'),
@@ -105,8 +79,8 @@ dat_keskuskunta <- dat_ku %>%
 ```
 
 ```
-## Warning: Column `ku_code`/`Knro` joining factors with different levels,
-## coercing to character vector
+## Warning: Column `ku_code`/`Knro` joining character vector and factor, coercing
+## into character vector
 ```
 
 Plot the data. Groups are ordered based on last value.
@@ -122,5 +96,5 @@ ggplot(dat_keskuskunta,
   theme_light()
 ```
 
-![](Introduction_files/figure-html/plot-1.png)<!-- -->
+![](C:\Users\JANNE~1.HUO\ONEDRI~1\Rpkg\STATFI~1\VIGNET~1\INTROD~1/figure-html/plot-1.png)<!-- -->
 

@@ -1,30 +1,29 @@
-## ----init----------------------------------------------------------------
+## ----init---------------------------------------------------------------------
 
 library(statfitools)
 library(dplyr)
 library(ggplot2)
 library(forcats)
 
-## ----data----------------------------------------------------------------
+## ----data---------------------------------------------------------------------
 
-# 115b -- V‰estˆ alueen, p‰‰asiallisen toiminnan, sukupuolen, i‰n ja vuoden mukaan, 1987-2017
+# 115b -- V√§est√∂ alueen, p√§√§asiallisen toiminnan, sukupuolen, i√§n ja vuoden mukaan, 1987-2017
 
-pxweb::pxweb_get("http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px")
 
 dat_ku <- pxweb::pxweb_get_data(
     url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px",
-    query = list(Tiedot = c("lkm"),
+    query = list(Tiedot = c("vaesto"),
                  Alue = c('*'),
-               "P‰‰asiallinen toiminta" = c('11'),
+               "P√§√§asiallinen toiminta" = c('11'),
                Sukupuoli = c('SSS'),
-               "Ik‰" = c('SSS'),
+               "Ik√§" = c('SSS'),
                Vuosi = c('*'))) %>% 
   clean_names(rename_values = TRUE) %>% 
   clean_times()
 
 
 
-## ----aggregate-----------------------------------------------------------
+## ----aggregate----------------------------------------------------------------
 
 dat_keskuskunta <- dat_ku %>% 
   # Remove whole country group
@@ -40,14 +39,14 @@ dat_keskuskunta <- dat_ku %>%
 
 
 
-## ----plot, fig.width=6---------------------------------------------------
+## ----plot, fig.width=6--------------------------------------------------------
 
 ggplot(dat_keskuskunta, 
        aes(time, values/1000, 
            colour = fct_reorder2(Keskusryhma, time, values))) +
   geom_line(size = 1.5) +
   guides(colour = guide_legend("")) +
-  ylab("1000 tyˆllist‰") + xlab("") +
+  ylab("1000 ty√∂llist√§") + xlab("") +
   theme_light()
 
 

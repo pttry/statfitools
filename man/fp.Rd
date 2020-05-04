@@ -16,7 +16,7 @@ fp(cp, pp, time, year)
 \item{year}{a numeric for a base year.}
 }
 \value{
-an vector
+an vector.
 }
 \description{
 For a yearly data calculates a serie in fixed prices at base years
