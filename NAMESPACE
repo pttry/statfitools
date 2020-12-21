@@ -2,6 +2,7 @@
 
 export(clean_names)
 export(clean_times)
+export(clean_times2)
 export(extract_code)
 export(extract_name)
 export(fp)
