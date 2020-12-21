@@ -4,7 +4,7 @@
 \alias{make_names}
 \title{Make syntactically valid names}
 \usage{
-make_names(x, to_lower = FALSE, rename_values = FALSE, ...)
+make_names(x, to_lower = TRUE, rename_values = FALSE, ...)
 }
 \arguments{
 \item{x}{a character vector (of factor) with names to change}

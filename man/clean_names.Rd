@@ -4,7 +4,7 @@
 \alias{clean_names}
 \title{Make syntactically valid names and reuturn an object}
 \usage{
-clean_names(x, to_lower = FALSE, rename_values = FALSE)
+clean_names(x, to_lower = TRUE, rename_values = FALSE)
 }
 \arguments{
 \item{x}{an object with names to change.}

@@ -18,7 +18,7 @@
 #'   make_names(c("M\u00E4\u00E4r\u00E4", "Regional code"))
 #'   make_names("Hello, world!")
 
-make_names <- function (x, to_lower = FALSE, rename_values = FALSE, ...) {
+make_names <- function (x, to_lower = TRUE, rename_values = FALSE, ...) {
 
   if (is.factor(x)){
     levels(x) <- make_names(levels(x))
@@ -61,7 +61,7 @@ make_names <- function (x, to_lower = FALSE, rename_values = FALSE, ...) {
 #' @examples
 #'    x <- data.frame("col 1!" = c(1,2), "col 2?" = c(2,4), check.names = FALSE)
 #'    names(clean_names(x))
-clean_names <- function(x, to_lower = FALSE, rename_values = FALSE){
+clean_names <- function(x, to_lower = TRUE, rename_values = FALSE){
   names(x) <- make_names(names(x), to_lower = to_lower, rename_values = rename_values, unique = TRUE)
   x
 }
