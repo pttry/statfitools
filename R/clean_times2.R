@@ -31,18 +31,13 @@ clean_times2 <- function (x, time_col = NULL, agg_time = NULL)
 
   if(!is.data.frame(x)) {stop("Input not data.frame!")}
 
-  if(is.null(time_col)){
-    if("Vuosi" %in% names(x)) {
-      time_col <- "Vuosi"
-    } else if("Vuosineljännes" %in% names(x)) {
-      time_col <- "Vuosineljännes"
-    } else if("Kuukausi" %in% names(x)) {
-      time_col <- "Kuukausi"
-    } else {
-      stop("Time column not automatically found. Please assign time column to time_col.")
-    }
-  } else if(!(time_col %in% names(x))) {
-    stop("The assigned time_col not found in data!")
+  if(is.null(time_col)) {
+    potential_time_cols <- c("kuukausi", "Kuukausi", "Vuosineljannes", "vuosineljannes",
+                             "Vuosineljännes", "vuosineljännes", "vuosi", "Vuosi")
+    time_col <- potential_time_cols[potential_time_cols %in% names(x)]
+  }
+  if(length(time_col) == 0) {
+    stop("Time column not automatically found. Please assign time column to time_col.")
   }
 
   year_col <-  substring(x[[time_col]],1,4)
