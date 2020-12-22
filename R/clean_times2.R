@@ -32,9 +32,8 @@ clean_times2 <- function (x, time_col = NULL, agg_time = NULL)
   if(!is.data.frame(x)) {stop("Input not data.frame!")}
 
   if(is.null(time_col)) {
-    potential_time_cols <- c("kuukausi", "Kuukausi", "Vuosineljannes", "vuosineljannes",
-                             "Vuosineljännes", "vuosineljännes", "vuosi", "Vuosi")
-    time_col <- potential_time_cols[potential_time_cols %in% names(x)]
+    time_col <- na.omit(match(c("vuosi", "vuosineljannes", "kuukausi"),
+                              make_names(names(x))))
   }
   if(length(time_col) == 0) {
     stop("Time column not automatically found. Please assign time column to time_col.")
