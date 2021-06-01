@@ -3,7 +3,7 @@
 #'
 #' @param x A data.frame
 #' @param time_col  column in x containing the time variable
-#' @param agg_time
+
 #'
 #' @return A data.frame
 #' @export
@@ -26,7 +26,7 @@
 #'                      Vuosi = as.character(2010:2019))
 #' clean_times2(data_y)
 #'
-clean_times2 <- function (x, time_col = NULL, agg_time = NULL)
+clean_times2 <- function (x, time_col = NULL)
 {
 
   if(!is.data.frame(x)) {stop("Input not data.frame!")}
@@ -39,26 +39,35 @@ clean_times2 <- function (x, time_col = NULL, agg_time = NULL)
     stop("Time column not automatically found. Please assign time column to time_col.")
   }
 
-  year_col <-  substring(x[[time_col]],1,4)
-  sub_year_col <- substring(x[[time_col]], 6,7)
+
+  freq <- substring(x[1, time_col],5,5)
+  sub_year_col <- substring(x[1, time_col], 6,7)
 
   if (nchar(paste(sub_year_col, collapse = "")) == 0) {
+    year_col <-  substring(x[[time_col]],1,4)
     time <- as.Date(paste0(as.character(year_col), "-01-01"))
     x$time <- time
     x[[time_col]] <- NULL
     return(x)
   }
   else {
-    subs <- unique(sub_year_col)
-    subs <- setdiff(subs, agg_time)
-    if (!(length(subs) %in% c(4, 12))) {
-      stop("Only yearly, quarterly and monthly data is cleaned. Check sub_year_col and agg_time")
+    # subs <- unique(sub_year_col)
+    # subs <- setdiff(subs, agg_time)
+    # if (!(length(subs) %in% c(4, 12))) {
+    #   stop("Only yearly, quarterly and monthly data is cleaned. Check sub_year_col and agg_time")
+    # }
+    # x <- droplevels(x[(sub_year_col %in% subs), ])
+    # months <- seq.int(1, by = 12/length(subs), length.out = length(subs))
+    # time <- as.Date(paste0(as.character(year_col),
+    #                        "-", months[match(sub_year_col, subs)],
+    #                        "-1"))
+    if (freq == "M"){
+      time <- lubridate::ym(x[[time_col]])
+    } else if (freq == "Q"){
+      time <- lubridate::yq(x[[time_col]])
+    } else {
+      stop("Non supported frequenczy")
     }
-    x <- droplevels(x[(sub_year_col %in% subs), ])
-    months <- seq.int(1, by = 12/length(subs), length.out = length(subs))
-    time <- as.Date(paste0(as.character(year_col),
-                           "-", months[match(sub_year_col, subs)],
-                           "-1"))
     x$time <- time
     x[[time_col]] <- NULL
     return(x)
