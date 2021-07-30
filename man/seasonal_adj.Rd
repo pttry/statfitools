@@ -2,15 +2,18 @@
 % Please edit documentation in R/seasonal.R
 \name{seasonal_adj}
 \alias{seasonal_adj}
+\alias{demetra_adj}
 \alias{sa_series}
 \alias{trend_series}
 \title{Easy and error-resistant wrap-up for seasonal adjustment}
 \usage{
 seasonal_adj(x, time, series = "sa", outlier.types = "ao", ...)
 
-sa_series(x, time, ...)
+demetra_adj(x, time, method = "tramoseats", series = "sa", ...)
 
-trend_series(x, time, ...)
+sa_series(x, time, method = "seas", ...)
+
+trend_series(x, time, method = "seas", ...)
 }
 \arguments{
 \item{x}{a numeric vector to seasonal adjust.}
@@ -25,9 +28,13 @@ for trend.}
 differs from \code{seas} default.}
 
 \item{...}{parameters passed to \code{\link[seasonal]{seas}}.}
+
+\item{method}{a method for seasonal adjustment. "tramoseats" or "x13" from the RJDemetra or
+"seas" for x13 from the seasonal package.}
 }
 \description{
-Seasonal adjustment using \code{\link[seasonal]{seasonal-package}}. Functions
+Seasonal adjustment using \code{\link[seasonal]{seasonal-package}} and
+\code{\link[RJDemetra]{RJDemetra-package}}. Functions
 take numeric and date vector and return numeric vector. If adjustment
 end in error, NA vector returned with warning.
 }
@@ -36,6 +43,8 @@ Intended specially to use in pipe with \code{\link[dplyr]{mutate}}.
 }
 \section{Functions}{
 \itemize{
+\item \code{demetra_adj}: Seasonal adjustment with RJDemetra
+
 \item \code{sa_series}: seasonal adjusted series
 
 \item \code{trend_series}: trend of seasonal adjusted series
@@ -43,4 +52,8 @@ Intended specially to use in pipe with \code{\link[dplyr]{mutate}}.
 
 \examples{
 y <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers))
+yy <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")
+yyy <- trend_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")
+  #' y <- demetra_adj(x = AirPassengers, time = zoo::as.Date(AirPassengers))
+
 }

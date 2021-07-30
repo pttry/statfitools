@@ -1,6 +1,6 @@
 Package: statfitools
 Title: Helper Functions for Working with the Data from Statistics Finland
-Version: 0.3.6.9001
+Version: 0.3.7.9000
 Authors@R: person("Janne", "Huovari", email = "janne.huovari@ptt.fi", role = c("aut", "cre"))
 Description: Helper functions for working with data from Statistics Finland.
 URL: http://github.com/jhuovari/statfitools
@@ -8,7 +8,6 @@ BugReports: http://github.com/jhuovari/statfitools/issues
 Depends:
     R (>= 3.1.2)
 Imports:
-    dplyr,
     tidyr,
     plyr,
     readr,
@@ -16,7 +15,9 @@ Imports:
     seasonal,
     lubridate,
     zoo,
-    stats
+    stats,
+    RJDemetra,
+    dplyr
 License: GPL-3
 LazyData: true
 Suggests:

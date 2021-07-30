@@ -1,7 +1,10 @@
-# statfitools 0.3.6.9001
+# statfitools 0.3.7
 
 * Fix NA issue with `fp`.
 * fp works with leading NAs now.
+* New demetra_adj for seasonal adjustmet with the RJDemetra package. 
+  Note Java ja Java jdk have to be installed. Can be used from `sa_series` and
+  `trend_series` with method argument "tramoseats" and "x13"
 
 
 # statfitools 0.3.6

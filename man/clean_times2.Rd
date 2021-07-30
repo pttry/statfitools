@@ -4,14 +4,12 @@
 \alias{clean_times2}
 \title{Convert Statfin time variable to Date.}
 \usage{
-clean_times2(x, time_col = NULL, agg_time = NULL)
+clean_times2(x, time_col = NULL)
 }
 \arguments{
 \item{x}{A data.frame}
 
 \item{time_col}{column in x containing the time variable}
-
-\item{agg_time}{}
 }
 \value{
 A data.frame
