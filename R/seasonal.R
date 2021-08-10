@@ -89,6 +89,12 @@ demetra_adj <- function(x, time, method = "tramoseats", series = "sa", ...){
   } else {
     stop("Unknown series spesicication")
   }
+
+  if (is.null(z)) {
+    z <- rep_len(NA, length.out = length(x))
+    warning("RJDmetra, ", method,  " failed")
+  }
+
   z
 }
 
