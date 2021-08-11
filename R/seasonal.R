@@ -53,7 +53,6 @@ seasonal_adj <- function(x, time, series = "sa", outlier.types = "ao", ...){
 
 #' @describeIn seasonal_adj Seasonal adjustment with RJDemetra
 #'
-#' @import RJDemetra
 #' @export
 #'
 #' @examples
@@ -62,6 +61,11 @@ seasonal_adj <- function(x, time, series = "sa", outlier.types = "ao", ...){
 
 
 demetra_adj <- function(x, time, method = "tramoseats", series = "sa", ...){
+
+  if (!requireNamespace("RJDemetra", quietly = TRUE)) {
+    stop("Package \"RJDemetra\" ja JAVA is needed for this function to work. Please install them, see https://github.com/jdemetra/rjdemetra.",
+         call. = FALSE)
+  }
 
   freq <- 1/lubridate:: time_length(
     lubridate::interval(time[1], time[2]), unit = "year")

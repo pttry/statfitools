@@ -12,34 +12,53 @@
 
 <meta name="author" content="Janne Huovari" />
 
-<meta name="date" content="2020-05-04" />
+<meta name="date" content="2021-08-10" />
 
 <title>Introduction to statfitools</title>
 
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -48,9 +67,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -107,187 +126,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 700px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 1.35;
-}
-#TOC {
-clear: both;
-margin: 0 0 10px 10px;
-padding: 4px;
-width: 400px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
-}
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
-}
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
-}
-#TOC ul ul {
-margin-left: -2em;
-}
-#TOC li {
-line-height: 16px;
-}
-table {
-margin: 1em auto;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
-}
-table th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
-}
-table td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
-}
-table, table th, table td {
-border-left-style: none;
-border-right-style: none;
-}
-table thead, table tr.even {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 0.25em 0.75em;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f7f7f7;
-border-radius: 3px;
-color: #333;
-white-space: pre-wrap; 
-}
-pre {
-border-radius: 3px;
-margin: 5px 0px 10px 0px;
-padding: 10px;
-}
-pre:not([class]) {
-background-color: #f7f7f7;
-}
-code {
-font-family: Consolas, Monaco, 'Courier New', monospace;
-font-size: 85%;
-}
-p > code, li > code {
-padding: 2px 0px;
-}
-div.figure {
-text-align: center;
-}
-img {
-background-color: #FFFFFF;
-padding: 2px;
-border: 1px solid #DDDDDD;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f7f7f7;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f7f7f7;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f7f7f7;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; } 
-code > span.er { color: #a61717; background-color: #e3d2d2; } 
-</style>
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
 
 
 
@@ -301,15 +141,15 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Introduction to statfitools</h1>
 <h4 class="author">Janne Huovari</h4>
-<h4 class="date">2020-05-04</h4>
+<h4 class="date">2021-08-10</h4>
 
 
 
 <div id="aggregate-municipality-data" class="section level1">
 <h1>Aggregate municipality data</h1>
 <p>Load packages</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(statfitools)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(dplyr)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statfitools)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
@@ -318,44 +158,42 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw">library</span>(forcats)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span></code></pre></div>
 <p>Get data from the Statistics Finland and clean variable names and time variable.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># 115b -- Väestö alueen, pääasiallisen toiminnan, sukupuolen, iän ja vuoden mukaan, 1987-2017</span></a>
-<a class="sourceLine" id="cb6-2" title="2"></a>
-<a class="sourceLine" id="cb6-3" title="3"></a>
-<a class="sourceLine" id="cb6-4" title="4">dat_ku &lt;-<span class="st"> </span>pxweb<span class="op">::</span><span class="kw">pxweb_get_data</span>(</a>
-<a class="sourceLine" id="cb6-5" title="5">    <span class="dt">url =</span> <span class="st">&quot;http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px&quot;</span>,</a>
-<a class="sourceLine" id="cb6-6" title="6">    <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">Tiedot =</span> <span class="kw">c</span>(<span class="st">&quot;vaesto&quot;</span>),</a>
-<a class="sourceLine" id="cb6-7" title="7">                 <span class="dt">Alue =</span> <span class="kw">c</span>(<span class="st">&#39;*&#39;</span>),</a>
-<a class="sourceLine" id="cb6-8" title="8">               <span class="st">&quot;Pääasiallinen toiminta&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;11&#39;</span>),</a>
-<a class="sourceLine" id="cb6-9" title="9">               <span class="dt">Sukupuoli =</span> <span class="kw">c</span>(<span class="st">&#39;SSS&#39;</span>),</a>
-<a class="sourceLine" id="cb6-10" title="10">               <span class="st">&quot;Ikä&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SSS&#39;</span>),</a>
-<a class="sourceLine" id="cb6-11" title="11">               <span class="dt">Vuosi =</span> <span class="kw">c</span>(<span class="st">&#39;*&#39;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="st">  </span><span class="kw">clean_names</span>(<span class="dt">rename_values =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="st">  </span><span class="kw">clean_times</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 115b -- Väestö alueen, pääasiallisen toiminnan, sukupuolen, iän ja vuoden mukaan, 1987-2017</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>dat_ku <span class="ot">&lt;-</span> pxweb<span class="sc">::</span><span class="fu">pxweb_get_data</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">url =</span> <span class="st">&quot;https://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px&quot;</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">query =</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="st">&quot;Alue&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;*&quot;</span>),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Pääasiallinen toiminta&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;11&quot;</span>),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Sukupuoli&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;SSS&quot;</span>),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Ikä&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;SSS&quot;</span>),</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Vuosi&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;*&quot;</span>),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Tiedot&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;vaesto&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_times</span>() <span class="sc">|</span><span class="er">&gt;</span> </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>(<span class="at">rename_values =</span> <span class="cn">TRUE</span>, <span class="at">to_lower =</span> <span class="cn">FALSE</span>) </span></code></pre></div>
 <p>Aggregate data using classification “Keskuskuntaryhma” included in the package.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">dat_keskuskunta &lt;-<span class="st"> </span>dat_ku <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="co"># Remove whole country group</span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Alue <span class="op">!=</span><span class="st"> &quot;KOKO MAA&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="co"># Join with codes. Codes are not included in the data.</span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ku_code =</span> <span class="kw">sf_name2code</span>(Alue, <span class="dt">class =</span> <span class="st">&quot;kunta&quot;</span>, <span class="dt">year =</span> <span class="dv">2016</span>)) <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="st">  </span><span class="kw">left_join</span>(keskuskuntaryhma_key, <span class="dt">by =</span> <span class="kw">c</span>(<span class="dt">ku_code =</span> <span class="st">&quot;Knro&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="st">  </span><span class="co"># Aggregate</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(Keskusryhma, time, Paaasiallinen_toiminta) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">values =</span> <span class="kw">sum</span>(values, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="st">  </span><span class="kw">ungroup</span>()</a></code></pre></div>
-<pre><code>## Warning: Column `ku_code`/`Knro` joining character vector and factor, coercing
-## into character vector</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dat_keskuskunta <span class="ot">&lt;-</span> dat_ku <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove whole country group</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Alue <span class="sc">!=</span> <span class="st">&quot;KOKO MAA&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Join with codes. Codes are not included in the data.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ku_code =</span> <span class="fu">sf_name2code</span>(Alue, <span class="at">class =</span> <span class="st">&quot;kunta&quot;</span>, <span class="at">year =</span> <span class="dv">2019</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(keskuskuntaryhma_key, <span class="at">by =</span> <span class="fu">c</span>(<span class="at">ku_code =</span> <span class="st">&quot;Knro&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Aggregate</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Keskusryhma, time, Paaasiallinen_toiminta) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">values =</span> <span class="fu">sum</span>(values, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
 <p>Plot the data. Groups are ordered based on last value.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">ggplot</span>(dat_keskuskunta, </a>
-<a class="sourceLine" id="cb9-2" title="2">       <span class="kw">aes</span>(time, values<span class="op">/</span><span class="dv">1000</span>, </a>
-<a class="sourceLine" id="cb9-3" title="3">           <span class="dt">colour =</span> <span class="kw">fct_reorder2</span>(Keskusryhma, time, values))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">colour =</span> <span class="kw">guide_legend</span>(<span class="st">&quot;&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;1000 työllistä&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="st">  </span><span class="kw">theme_light</span>()</a></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_keskuskunta, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(time, values<span class="sc">/</span><span class="dv">1000</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> <span class="fu">fct_reorder2</span>(Keskusryhma, time, values))) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="st">&quot;&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;1000 työllistä&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code></pre></div>
 </div>
 
 
