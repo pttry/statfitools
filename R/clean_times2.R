@@ -73,3 +73,33 @@ clean_times2 <- function (x, time_col = NULL)
     return(x)
   }
 }
+
+
+#' Convert a time column to year column
+#'
+#' A time named column in a data.frame that is a Date object is converted to year columnt that
+#' is a numeric column.
+#'
+#' @param x A data.frame
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#'
+#' x <- data.frame(time = as.Date(c("2020-01-01", "2021-01-01", "2022-01-01")), a = c(1,2,3))
+#' time2year(x)
+#'
+time2year <- function(x){
+
+  time <- x$time
+  # check that is yearly data
+  if (!(all(lubridate::month(time) == 1) & all(lubridate::day(time) == 1))) {
+    stop("time-column is not format year-01-01")
+  }
+
+  x <- dplyr::rename(x, year = time)
+  x$year <- lubridate::year(time)
+
+  x
+}

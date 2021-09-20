@@ -1,3 +1,8 @@
+# statfitools 0.3.8
+
+* `time2year` a function to convert yearly date time column to numeric year column.
+
+
 # statfitools 0.3.7
 
 * Fix NA issue with `fp`.
