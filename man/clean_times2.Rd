@@ -26,7 +26,7 @@ data_m <- data.frame(values = rnorm(24),
 clean_times2(data_m)
 
 data_q <- data.frame(values = rnorm(12),
-                     VuosineljÃ¤nnes = as.vector(sapply(as.character(2016:2018),
+                     Vuosineljannes = as.vector(sapply(as.character(2016:2018),
                                                        paste0,
                                                        paste0("Q", as.character(1:4)))))
 clean_times2(data_q)

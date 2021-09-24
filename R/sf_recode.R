@@ -14,25 +14,28 @@
 #'  in the classification data.frame. See \code{\link{sf_get_class}}.
 #' @param ... futher parameters to \code{\link{sf_get_class}} to select classification.
 #' @export
-#' @examples
-#'  sf_recode(c("049", "050"), 1, 2, class = "kunta", year = 2014)
-#'  sf_recode(c("Espoo", "Eura"), 2, 1, class = "kunta", year = 2014)
-#'  sf_code2name(c("049", "050"), class = "kunta", year = 2014)
+
 
 sf_recode <- function(x, from, to, ...){
-  cl <- sf_get_class(...)
-  y <- cl[[to]][match(x, cl[[from]])]
-  y
+  # cl <- sf_get_class(...)
+  # y <- cl[[to]][match(x, cl[[from]])]
+  # y
+  .Defunct("statficlassifications::recode_region",
+           msg = "To recode regions use functions from statficlassifications package")
 }
 
 #' @describeIn sf_recode From code to name.
 #' @export
 sf_code2name <- function(x, ...){
-  sf_recode(x, 1, 2, ...)
+  # sf_recode(x, 1, 2, ...)
+  .Defunct("statficlassifications::codes_to_names",
+           msg = "To recode regions use functions from statficlassifications package")
 }
 
 #' @describeIn sf_recode From name to code.
 #' @export
 sf_name2code <- function(x, ...){
-  sf_recode(x, 2, 1, ...)
+  # sf_recode(x, 2, 1, ...)
+  .Defunct("statficlassifications::names_to_codes",
+           msg = "To recode regions use functions from statficlassifications package")
 }

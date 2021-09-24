@@ -39,8 +39,3 @@ The first should be a numeric code and the second a name.
 \item \code{sf_name2code}: From name to code.
 }}
 
-\examples{
- sf_recode(c("049", "050"), 1, 2, class = "kunta", year = 2014)
- sf_recode(c("Espoo", "Eura"), 2, 1, class = "kunta", year = 2014)
- sf_code2name(c("049", "050"), class = "kunta", year = 2014)
-}
