@@ -126,3 +126,24 @@ trend_series <- function(x, time, method = "seas", ...){
   }
   y
 }
+
+
+
+#' Create trend using local polynomial regression
+#'
+#' @param x a numeric vector to smooth.
+#' @param time a date vector.
+#' @param ... additional arguments such as 'span' that the stats::loess function
+#'    takes
+#'
+#' @return numerical vector
+#' @export
+#'
+#'
+loess_series <- function(x, time, ...) {
+
+  time <- as.double(time)
+  loess(x ~ time, ...)$fitted
+
+}
+
