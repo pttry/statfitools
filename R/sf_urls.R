@@ -97,3 +97,17 @@ open_statfi_qui <- function(x = "") {
   browseURL(x)
 
 }
+
+#' Get table code from url
+#'
+#' @param url A url
+#'
+#' @export
+url_to_table_code <- function(url){
+
+  sapply(url,
+         function(x) {paste(stringr::str_match(x, "statfin_\\s*(.*?)\\s*pxt_\\s*(.*?)\\s*.px")[,2:3], collapse = "")},
+         USE.NAMES = FALSE)
+
+}
+
