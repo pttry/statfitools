@@ -20,9 +20,9 @@ argument as such.
 }
 \section{Functions}{
 \itemize{
-\item \code{statfi_parse_url_arch}: Parsing function for archived databases.
-}}
+\item \code{statfi_parse_url_arch()}: Parsing function for archived databases.
 
+}}
 \examples{
   statfi_parse_url("https://statfin.stat.fi/PxWeb/pxweb/fi/StatFin/StatFin__muutl/statfin_muutl_pxt_119z.px/")
   statfi_parse_url("StatFin__muutl/statfin_muutl_pxt_119z.px/", with_base_url = FALSE)
@@ -30,5 +30,5 @@ argument as such.
   statfi_parse_url("https://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/muutl/statfin_muutl_pxt_119z.px")
   statfi_parse_url("https://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/muutl/statfin_muutl_pxt_119z.px", with_base_url = FALSE)
 
-  statfi_parse_url_arch("https://pxnet2.stat.fi/PXWeb/pxweb/fi/StatFin_Passiivi/StatFin_Passiivi__tym__atp/statfinpas_atp_pxt_901_2012q4_fi.px/")
+  statfi_parse_url_arch("https://statfin.stat.fi/PxWeb/pxweb/fi/StatFin_Passiivi/StatFin_Passiivi__kivih/statfinpas_kivih_pxt_001_201812_fi.px/")
 }

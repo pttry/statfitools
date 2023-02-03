@@ -9,14 +9,11 @@ statfi_parse_qui_url(url)
 \arguments{
 \item{url}{character, url}
 }
-\value{
-
-}
 \description{
 Parse Statfi pxweb qui url from api url
 }
 \examples{
 
-  statfi_parse_qui_url("StatFin__muutl/statfin_muutl_pxt_119z.px/")
+  statfi_parse_qui_url("https://statfin.stat.fi/PXWeb/api/v1/fi/StatFin/muutl/statfin_muutl_pxt_119z.px")
 
 }

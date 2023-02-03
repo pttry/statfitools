@@ -43,13 +43,13 @@ Intended specially to use in pipe with \code{\link[dplyr]{mutate}}.
 }
 \section{Functions}{
 \itemize{
-\item \code{demetra_adj}: Seasonal adjustment with RJDemetra
+\item \code{demetra_adj()}: Seasonal adjustment with RJDemetra
 
-\item \code{sa_series}: seasonal adjusted series
+\item \code{sa_series()}: seasonal adjusted series
 
-\item \code{trend_series}: trend of seasonal adjusted series
+\item \code{trend_series()}: trend of seasonal adjusted series
+
 }}
-
 \examples{
 y <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers))
 yy <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")

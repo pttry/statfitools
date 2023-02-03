@@ -34,8 +34,8 @@ The first should be a numeric code and the second a name.
 }
 \section{Functions}{
 \itemize{
-\item \code{sf_code2name}: From code to name.
+\item \code{sf_code2name()}: From code to name.
 
-\item \code{sf_name2code}: From name to code.
+\item \code{sf_name2code()}: From name to code.
+
 }}
-

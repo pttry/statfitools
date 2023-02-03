@@ -9,14 +9,11 @@ open_statfi_qui(x = "")
 \arguments{
 \item{x}{character, url or table code. If table code, set db_list_name}
 }
-\value{
-
-}
 \description{
 Open table in QUI PxWeb
 }
 \examples{
 
-  open_statfi_qui("StatFin__muutl/statfin_muutl_pxt_119z.px/")
+  open_statfi_qui("https://statfin.stat.fi/PXWeb/api/v1/fi/StatFin/muutl/statfin_muutl_pxt_119z.px")
 
 }

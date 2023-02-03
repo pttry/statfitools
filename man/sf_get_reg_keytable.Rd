@@ -6,8 +6,8 @@
 \usage{
 sf_get_reg_keytable(
   classes = NULL,
- 
-    url = "http://www.tilastokeskus.fi/static/media/uploads/meta/luokitukset/kooste_2016_kaikki_kielet.xlsx",
+  url =
+    "http://www.tilastokeskus.fi/static/media/uploads/meta/luokitukset/kooste_2016_kaikki_kielet.xlsx",
   as_factors = default.stringsAsFactors()
 )
 }
