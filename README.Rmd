@@ -44,6 +44,26 @@ library("dplyr")
 
 ```
 
+### Get data
+
+Get formated data from statfi
+
+```{r}
+
+dat <- statfi_get_data(
+  "https://statfin.stat.fi/PXWeb/api/v1/fi/StatFin/tyti/statfin_tyti_pxt_11pk.px/",
+  list(
+    Vuosi = c("*"),
+    Sukupuoli = c("SSS"),
+    Tiedot = c("*")
+  )
+)
+
+str(dat)
+
+```
+
+
 ### Preprocess data
 
 #### Make legal names
@@ -57,15 +77,15 @@ Try to make more readable valid names than `make.names()`
 
 # install.packages("pxweb")
 
-dat <- pxweb::get_pxweb_data(
-  url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/010_tyokay_tau_101.px",
-  dims = list(
+dat <- pxweb::pxweb_get_data(
+  url = "https://statfin.stat.fi/PXWeb/api/v1/fi/StatFin/tyokay/statfin_tyokay_pxt_115b.px",
+  query = list(
     Alue = c('SSS'),
     "Pääasiallinen toiminta" = c('*'),
-    Sukupuoli = c('S'),
+    Sukupuoli = c('SSS'),
     "Ikä" = c('SSS'),
-    Vuosi = c('*')),
-  clean = TRUE)
+    Vuosi = c('*'),
+    Tiedot = c('*')))
 
 names(dat)
 
@@ -73,6 +93,8 @@ dat <- clean_names(dat)
 
 names(dat)
 ```
+
+
 
 #### Extract code or name from a code-name string
 
