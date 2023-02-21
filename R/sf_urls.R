@@ -15,7 +15,7 @@
 statfi_url <- function(...,
                        with_base_url = TRUE,
                        lang = "fi",
-                       .base_url = "https://statfin.stat.fi/PXWeb/api/v1"){
+                       .base_url = "https://pxdata.stat.fi/PXWeb/api/v1"){
   if(with_base_url) {
     file.path(.base_url, lang, ..., fsep = "/")
   } else {
@@ -42,6 +42,7 @@ statfi_url <- function(...,
 #'
 statfi_parse_url <- function(url, with_base_url = TRUE){
 
+  url <- stringr::str_remove(url, "https://pxdata.stat.fi/PxWeb/pxweb/fi/StatFin/")
   url <- stringr::str_remove(url, "https://statfin.stat.fi/PxWeb/pxweb/fi/StatFin/")
   url <- stringr::str_remove(url, "https://pxnet2.stat.fi/PXWeb/api/v1/fi/")
   url <- stringr::str_replace_all(url, "__", "/")
@@ -55,6 +56,7 @@ statfi_parse_url <- function(url, with_base_url = TRUE){
 #' @examples
 #'   statfi_parse_url_arch("https://statfin.stat.fi/PxWeb/pxweb/fi/StatFin_Passiivi/StatFin_Passiivi__kivih/statfinpas_kivih_pxt_001_201812_fi.px/")
 statfi_parse_url_arch <- function(url){
+  url <- stringr::str_remove(url, "https://pxdata.stat.fi/PxWeb/pxweb/fi/StatFin_Passiivi/")
   url <- stringr::str_remove(url, "https://statfin.stat.fi/PxWeb/pxweb/fi/StatFin_Passiivi/")
   url <- stringr::str_remove(url, "https://pxnet2.stat.fi/PXWeb/pxweb/fi/StatFin_Passiivi/")
   url <- stringr::str_replace_all(url, "__", "/")
