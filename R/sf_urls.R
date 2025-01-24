@@ -68,7 +68,7 @@ statfi_parse_url_arch <- function(url){
 #'
 #' @param url character, url
 #'
-#' @return
+#' @return A character
 #' @export
 #'
 #' @examples
@@ -86,18 +86,24 @@ statfi_parse_qui_url <- function(url){
 
 }
 
-#' Open table in QUI PxWeb
+#' Open API url in QUI PxWeb
+#'
+#' Can be also used with table codes with \code{\link[pttdatahaku]{pttdatahaku}}.
 #'
 #' @param x character, url or table code. If table code, set db_list_name
+#' @param db_list_name character, database of the table
 #'
-#' @return
 #' @export
 #'
 #' @examples
 #'
 #'   open_statfi_qui("https://statfin.stat.fi/PXWeb/api/v1/fi/StatFin/muutl/statfin_muutl_pxt_119z.px")
 #'
-open_statfi_qui <- function(x = "") {
+open_statfi_qui <- function(x = "", db_list_name = NULL) {
+
+  if(!is.null(db_list_name)) {
+    x <- pttdatahaku::table_code_to_url(x, db_list_name = db_list_name)
+  }
 
   x <- statfi_parse_qui_url(x)
   browseURL(x)

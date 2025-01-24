@@ -1,6 +1,7 @@
 # statfitools 0.3.8
 
 * `time2year` a function to convert yearly date time column to numeric year column.
+* `open_statfi_qui` takes now db_list_name.
 
 
 # statfitools 0.3.7

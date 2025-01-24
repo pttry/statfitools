@@ -1,12 +1,12 @@
 Package: statfitools
 Title: Helper Functions for Working with the Data from Statistics Finland
-Version: 0.3.7.9004
+Version: 0.3.8
 Authors@R: person("Janne", "Huovari", email = "janne.huovari@ptt.fi", role = c("aut", "cre"))
 Description: Helper functions for working with data from Statistics Finland.
 URL: http://github.com/jhuovari/statfitools
 BugReports: http://github.com/jhuovari/statfitools/issues
 Depends:
-    R (>= 3.1.2)
+    R (>= 3.5)
 Imports:
     tidyr,
     plyr,
@@ -16,17 +16,17 @@ Imports:
     lubridate,
     zoo,
     stats,
-    dplyr
+    dplyr,
+    pxweb
 License: GPL-3
 LazyData: true
 Suggests:
     knitr,
     testthat (>= 2.1.0),
-    pxweb,
     rmarkdown,
     forcats,
     ggplot2,
     RJDemetra
 Encoding: UTF-8
 VignetteBuilder: knitr
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2

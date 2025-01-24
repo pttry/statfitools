@@ -2,15 +2,17 @@
 % Please edit documentation in R/sf_urls.R
 \name{open_statfi_qui}
 \alias{open_statfi_qui}
-\title{Open table in QUI PxWeb}
+\title{Open API url in QUI PxWeb}
 \usage{
-open_statfi_qui(x = "")
+open_statfi_qui(x = "", db_list_name = NULL)
 }
 \arguments{
 \item{x}{character, url or table code. If table code, set db_list_name}
+
+\item{db_list_name}{character, database of the table}
 }
 \description{
-Open table in QUI PxWeb
+Can be also used with table codes with \code{\link[pttdatahaku]{pttdatahaku}}.
 }
 \examples{
 
