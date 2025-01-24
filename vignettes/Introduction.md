@@ -1,7 +1,7 @@
 ---
 title: "Introduction to statfitools"
 author: "Janne Huovari"
-date: "2021-08-10"
+date: "2025-01-24"
 output: 
   rmarkdown::html_vignette:
     keep_md: true
@@ -16,7 +16,7 @@ vignette: >
 Load packages
 
 
-```r
+``` r
 library(statfitools)
 library(dplyr)
 ```
@@ -38,7 +38,7 @@ library(dplyr)
 ##     intersect, setdiff, setequal, union
 ```
 
-```r
+``` r
 library(ggplot2)
 library(forcats)
 ```
@@ -46,12 +46,12 @@ library(forcats)
 Get data from the Statistics Finland and clean variable names and time variable.
 
 
-```r
+``` r
 # 115b -- Väestö alueen, pääasiallisen toiminnan, sukupuolen, iän ja vuoden mukaan, 1987-2017
 
 
 dat_ku <- pxweb::pxweb_get_data(
-    url = "https://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px",
+    url = "https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/tyokay/statfin_tyokay_pxt_115b.px",
     query = 
       list("Alue"=c("*"),
        "Pääasiallinen toiminta"=c("11"),
@@ -66,7 +66,7 @@ dat_ku <- pxweb::pxweb_get_data(
 Aggregate data using classification "Keskuskuntaryhma" included in the package. 
 
 
-```r
+``` r
 dat_keskuskunta <- dat_ku %>% 
   # Remove whole country group
   filter(Alue != "KOKO MAA") %>%
@@ -82,7 +82,7 @@ dat_keskuskunta <- dat_ku %>%
 Plot the data. Groups are ordered based on last value.
 
 
-```r
+``` r
 ggplot(dat_keskuskunta, 
        aes(time, values/1000, 
            colour = fct_reorder2(Keskusryhma, time, values))) +

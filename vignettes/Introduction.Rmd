@@ -31,7 +31,7 @@ Get data from the Statistics Finland and clean variable names and time variable.
 
 
 dat_ku <- pxweb::pxweb_get_data(
-    url = "https://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115b.px",
+    url = "https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/tyokay/statfin_tyokay_pxt_115b.px",
     query = 
       list("Alue"=c("*"),
        "Pääasiallinen toiminta"=c("11"),
