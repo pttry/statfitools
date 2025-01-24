@@ -7,7 +7,9 @@ public_debt <- pxweb::get_pxweb_data(url = "http://pxnet2.stat.fi/PXWeb/api/v1/f
                                                 Vuosi = c('*')),
                                     clean = TRUE)
 
-devtools::use_data(public_debt, overwrite = TRUE)
+names(public_debt)[1] <- "Alijäämä/velka"
+
+usethis::use_data(public_debt, overwrite = TRUE)
 
 output_ind <-
   get_pxweb_data(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/kan/ktkk/110_ktkk_tau_101.px",
@@ -28,7 +30,7 @@ keskuskunnat <- readr::read_tsv("data-raw/Keskuskunnat.txt", col_types = readr::
   Keskusryhma = readr::col_character()
 ))
 
-devtools::use_data(keskuskunnat, overwrite = TRUE)
+usethis::use_data(keskuskunnat, overwrite = TRUE)
 
 library(dplyr)
 
@@ -38,7 +40,7 @@ key_kuntar[match(keskuskunnat$Kunta, key_kuntar$Kunta), "Kuntaryhma"] <- keskusk
 keskuskuntaryhma_key <- key_kuntar %>%
   select(Knro, Kunta, Keskusryhma = Kuntaryhma)
 
-devtools::use_data(keskuskuntaryhma_key, overwrite = TRUE)
+usethis::use_data(keskuskuntaryhma_key, overwrite = TRUE)
 
 write.csv2(keskuskuntaryhma_key, file = "data-raw/Keskuskuntaryhma_key.csv")
 
@@ -49,4 +51,4 @@ write.csv2(keskuskuntaryhma_key, file = "data-raw/Keskuskuntaryhma_key.csv")
 mk_pitka_key <- readr::read_csv2("data-raw/Maakunnat_pitka.csv",
   col_types = "ccc")
 
-devtools::use_data(mk_pitka_key, overwrite = TRUE)
+usethis::use_data(mk_pitka_key, overwrite = TRUE)

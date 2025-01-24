@@ -77,12 +77,12 @@ clean_times2 <- function (x, time_col = NULL)
 
 #' Convert a time column to year column
 #'
-#' A time named column in a data.frame that is a Date object is converted to year columnt that
+#' A time named column in a data.frame that is a Date object is converted to year column that
 #' is a numeric column.
 #'
 #' @param x A data.frame
 #'
-#' @return
+#' @return A data.frame
 #' @export
 #'
 #' @examples

@@ -22,8 +22,8 @@
 #' @import dplyr
 #' @examples
 #' y <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers))
-#' yy <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")
-#' yyy <- trend_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")
+#' # yy <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")
+#' # yyy <- trend_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")
 
 seasonal_adj <- function(x, time, series = "sa", outlier.types = "ao", ...){
 

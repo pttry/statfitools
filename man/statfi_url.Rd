@@ -8,7 +8,7 @@ statfi_url(
   ...,
   with_base_url = TRUE,
   lang = "fi",
-  .base_url = "https://statfin.stat.fi/PXWeb/api/v1"
+  .base_url = "https://pxdata.stat.fi/PXWeb/api/v1"
 )
 }
 \arguments{

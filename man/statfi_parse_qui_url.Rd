@@ -9,6 +9,9 @@ statfi_parse_qui_url(url)
 \arguments{
 \item{url}{character, url}
 }
+\value{
+A character
+}
 \description{
 Parse Statfi pxweb qui url from api url
 }

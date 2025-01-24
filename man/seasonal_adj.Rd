@@ -52,8 +52,8 @@ Intended specially to use in pipe with \code{\link[dplyr]{mutate}}.
 }}
 \examples{
 y <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers))
-yy <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")
-yyy <- trend_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")
+# yy <- sa_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")
+# yyy <- trend_series(x = AirPassengers, time = zoo::as.Date(AirPassengers), method = "tramoseats")
   #' y <- demetra_adj(x = AirPassengers, time = zoo::as.Date(AirPassengers))
 
 }

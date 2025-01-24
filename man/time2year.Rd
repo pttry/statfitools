@@ -9,8 +9,11 @@ time2year(x)
 \arguments{
 \item{x}{A data.frame}
 }
+\value{
+A data.frame
+}
 \description{
-A time named column in a data.frame that is a Date object is converted to year columnt that
+A time named column in a data.frame that is a Date object is converted to year column that
 is a numeric column.
 }
 \examples{

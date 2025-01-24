@@ -19,10 +19,5 @@ Useful links:
 \author{
 \strong{Maintainer}: Janne Huovari \email{janne.huovari@ptt.fi}
 
-Other contributors:
-\itemize{
-  \item Pellervon taloustutkimus [funder]
-}
-
 }
 \keyword{internal}
