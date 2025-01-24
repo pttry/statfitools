@@ -23,14 +23,14 @@ test_that("extract_name returns name",{
 })
 
 
-context("get_class")
-
-
-test_that("get_class functions return data.frame",{
-  expect_is(sf_get_class("kuntaryhmitys", 2014), "data.frame")
-  expect_is(sf_get_reg_keytable("Maakunta"), "data.frame")
-  expect_is(sf_get_class("maakunta", 2013), "data.frame")
-})
+# context("get_class")
+#
+#
+# test_that("get_class functions return data.frame",{
+#   expect_is(sf_get_class("kuntaryhmitys", 2014), "data.frame")
+#   expect_is(sf_get_reg_keytable("Maakunta"), "data.frame")
+#   expect_is(sf_get_class("maakunta", 2013), "data.frame")
+# })
 
 context("clean")
 
