@@ -1,3 +1,7 @@
+# statfitools 0.3.9
+
+* `codes2names` have no argument for code and name suffix.
+
 # statfitools 0.3.8
 
 * `time2year` a function to convert yearly date time column to numeric year column.

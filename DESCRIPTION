@@ -1,6 +1,6 @@
 Package: statfitools
 Title: Helper Functions for Working with the Data from Statistics Finland
-Version: 0.3.8
+Version: 0.3.9
 Authors@R: person("Janne", "Huovari", email = "janne.huovari@ptt.fi", role = c("aut", "cre"))
 Description: Helper functions for working with data from Statistics Finland.
 URL: http://github.com/jhuovari/statfitools

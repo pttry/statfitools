@@ -2,12 +2,14 @@
 #'
 #' @param .data A data.frame or similar.
 #' @param codes_names A named (column codes) list of named (codes) vectors (names).
-#'        For example from [px_code_name()].
-#' @param to_name A columns to name. Default are names from [codes_names] list.
+#'        For example, from [px_code_name()].
+#' @param to_name A vector of column names to be translated to names. Default is the names from `codes_names`.
+#' @param name_suffix Suffix to add to name columns. Default is `"_name"`.
+#' @param code_suffix Suffix to add to code columns. Default is `"_code"`.
 #'
 #' @export
 #'
-#' @return A modified data.frame or similar.
+#' @return A modified data.frame or similar with `_name` and `_code` suffixes added as specified.
 #'
 #' @examples
 #'
@@ -15,20 +17,34 @@
 #' cn <- list(a = c("a1" = "first", "a2" = "second"),
 #'            b = c("b1" = "other", "b2" = "something"))
 #' codes2names(x, cn)
-#' codes2names(x, cn, "a")
-
-codes2names <- function(.data, codes_names, to_name = names(codes_names)){
+#' codes2names(x, cn, to_name = "a", name_suffix = "_label", code_suffix = "_identifier")
+codes2names <- function(.data, codes_names, to_name = names(codes_names), name_suffix = "_name", code_suffix = "_code") {
 
   if (is.null(to_name)) return(.data)
 
-  .data <- dplyr::mutate(.data, across(any_of(to_name) & where(is.character),
-                                       ~factor(.x,
-                                               levels = names(codes_names[[cur_column()]]),
-                                               labels = codes_names[[cur_column()]]),
-                                       .names = "{.col}_name"))
+  # Add name columns with the specified suffix
+  .data <- dplyr::mutate(
+    .data,
+    across(
+      any_of(to_name) & where(is.character),
+      ~ factor(
+        .x,
+        levels = names(codes_names[[cur_column()]]),
+        labels = codes_names[[cur_column()]]
+      ),
+      .names = paste0("{.col}", name_suffix)
+    )
+  )
 
-  .data <- dplyr::rename_with(.data, .cols = any_of(to_name) & where(is.character), ~paste0(.x, "_code"))
-  dplyr::mutate(.data, across(contains("_code"), ~forcats::as_factor(.x)))
+  # Rename original code columns with the specified suffix
+  .data <- dplyr::rename_with(
+    .data,
+    .cols = any_of(to_name) & where(is.character),
+    ~ paste0(.x, code_suffix)
+  )
+
+  # Ensure all code columns are factors
+  dplyr::mutate(.data, across(contains(code_suffix), ~ forcats::as_factor(.x)))
 }
 
 

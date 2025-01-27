@@ -20,63 +20,61 @@
 
 clean_times <- function(x, time_format = NULL,
                         year_col = "Vuosi", sub_year_col = NULL,
-                        agg_time = NULL){
-  # guess sub year
+                        agg_time = NULL) {
+  # Guess sub year
   if (is.null(sub_year_col)) {
     sub_years <- c("Nelj\u00e4nnesvuosi", "Neljannesvuosi", "Kuukausi")
     sub_year_col <- sub_years[sub_years %in% names(x)]
   }
 
   # Only yearly
-  if (length(sub_year_col) == 0){
-    if (is.null(time_format) || time_format == "num"){
+  if (length(sub_year_col) == 0) {
+    if (is.null(time_format) || time_format == "num") {
       time <- readr::parse_number(as.character(x[[year_col]]))
-    } else if (time_format == "date"){
+    } else if (time_format == "date") {
       time <- as.Date(
         paste0(readr::parse_number(as.character(x[[year_col]])), "-01-01"))
     } else {
       stop("Unknown time_format ", time_format)
     }
 
-    x <- rename(x, time = year_col)
+    # Use all_of() to reference external column name
+    x <- rename(x, time = all_of(year_col))
     x$time <- time
     return(x)
 
-  # mounthly or quertely
+    # Monthly or quarterly
   } else {
-
-
-    # get months or quarters
+    # Get months or quarters
     subs <- unique(x[[sub_year_col]])
 
-    # remove aggregate time value. Quarterly and monthly allowed
+    # Remove aggregate time value. Quarterly and monthly allowed
     subs <- setdiff(subs, agg_time)
-    if (!(length(subs) %in% c(4,12))) {
+    if (!(length(subs) %in% c(4, 12))) {
       stop("Only quarterly and monthly data is cleaned. Check sub_year_col and agg_time")
     }
 
-    x <- droplevels(x[(x[[sub_year_col]] %in% subs),])
+    x <- droplevels(x[x[[sub_year_col]] %in% subs, ])
 
+    months <- seq.int(1, by = 12 / length(subs), length.out = length(subs))
 
-    mounths <- seq.int(1, by = 12/length(subs), length.out = length(subs))
-
-    if (is.null(time_format) || time_format == "date"){
+    if (is.null(time_format) || time_format == "date") {
       time <- as.Date(
         paste0(readr::parse_number(as.character(x[[year_col]])), "-",
-               mounths[match(x[[sub_year_col]], subs)] , "-1"))
+               months[match(x[[sub_year_col]], subs)], "-1"))
 
     } else if (time_format == "num") {
       time <- readr::parse_number(as.character(x[[year_col]])) +
-        (match(x[[sub_year_col]], subs) - 1) * 1/length(subs)
+        (match(x[[sub_year_col]], subs) - 1) * 1 / length(subs)
     } else {
       stop("Unknown time_format ", time_format)
     }
 
-    x[, sub_year_col] <- NULL
-    x <- rename(x, time = year_col)
+    # Use all_of() to reference external column name
+    x <- select(x, -all_of(sub_year_col))
+    x <- rename(x, time = all_of(year_col))
     x$time <- time
     return(x)
   }
-
-
 }
+
