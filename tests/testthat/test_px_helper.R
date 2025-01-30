@@ -113,3 +113,110 @@ test_that("codes2names replaces original columns when name_suffix is empty", {
 
 
 })
+
+test_that("codes2names handles to_name = TRUE correctly", {
+  # Example data
+  x <- data.frame(a = c("a1", "a2"),
+                  b = c("b1", "b2"),
+                  c = c("c1", "c2"),  # Character column
+                  d = factor(c("d1", "d2")))  # Factor column
+
+  cn <- list(a = c("a1" = "first", "a2" = "second"),
+             b = c("b1" = "other", "b2" = "something"),
+             c = c("c1" = "group1", "c2" = "group2"),
+             d = c("d1" = "category1", "d2" = "category2"))
+
+  # Apply function with to_name = TRUE (should apply to all mapped variables)
+  result <- codes2names(x, cn, to_name = TRUE)
+
+  # Check if all relevant columns got _name and _code suffixes
+  expect_true(all(c("a_code", "a_name", "b_code", "b_name", "c_code", "c_name", "d_code", "d_name") %in% colnames(result)))
+
+  # Check value replacements
+  expect_equal(result$a_name, factor(c("first", "second")))
+  expect_equal(result$d_name, factor(c("category1", "category2")))
+})
+
+test_that("codes2names handles to_name = NULL correctly (should return unmodified data)", {
+  # Example data
+  x <- data.frame(a = c("a1", "a2"),
+                  b = c("b1", "b2"),
+                  d = factor(c("d1", "d2")))
+
+  cn <- list(a = c("a1" = "first", "a2" = "second"),
+             b = c("b1" = "other", "b2" = "something"),
+             d = c("d1" = "category1", "d2" = "category2"))
+
+  # Apply function with to_name = NULL
+  result <- codes2names(x, cn, to_name = NULL)
+
+  # Expect the original dataframe to be unchanged
+  expect_equal(result, x)
+})
+
+test_that("codes2names handles to_name = FALSE correctly (should return unmodified data)", {
+  # Example data
+  x <- data.frame(a = c("a1", "a2"),
+                  b = c("b1", "b2"),
+                  d = factor(c("d1", "d2")))
+
+  cn <- list(a = c("a1" = "first", "a2" = "second"),
+             b = c("b1" = "other", "b2" = "something"),
+             d = c("d1" = "category1", "d2" = "category2"))
+
+  # Apply function with to_name = FALSE
+  result <- codes2names(x, cn, to_name = FALSE)
+
+  # Expect the original dataframe to be unchanged
+  expect_equal(result, x)
+})
+
+test_that("codes2names handles to_name as a character vector correctly", {
+  # Example data
+  x <- data.frame(a = c("a1", "a2"),
+                  b = c("b1", "b2"),
+                  d = factor(c("d1", "d2")))
+
+  cn <- list(a = c("a1" = "first", "a2" = "second"),
+             b = c("b1" = "other", "b2" = "something"),
+             d = c("d1" = "category1", "d2" = "category2"))
+
+  # Apply function with to_name = "a" (only column "a" should be modified)
+  result <- codes2names(x, cn, to_name = "a")
+
+  # Check that only "a" is modified
+  expect_true(all(c("a_code", "a_name") %in% colnames(result)))
+  expect_false(any(c("b_code", "b_name", "d_code", "d_name") %in% colnames(result)))
+
+  # Check value replacements
+  expect_equal(result$a_name, factor(c("first", "second")))
+})
+
+test_that("codes2names handles extra entries in codes_names gracefully", {
+  # Example data
+  x <- data.frame(a = c("a1", "a2"),
+                  b = c("b1", "b2"),
+                  d = factor(c("d1", "d2")))
+
+  # codes_names includes an extra key "extra_column" not in x
+  cn <- list(a = c("a1" = "first", "a2" = "second"),
+             b = c("b1" = "other", "b2" = "something"),
+             d = c("d1" = "category1", "d2" = "category2"),
+             extra_column = c("e1" = "extra1", "e2" = "extra2"))  # Extra column not in x
+
+  # Apply function
+  result <- codes2names(x, cn, to_name = TRUE)
+
+  # Ensure result structure is correct (no errors, no extra columns added)
+  expect_false("extra_column" %in% colnames(result))
+  expect_false("extra_column_name" %in% colnames(result))
+  expect_false("extra_column_code" %in% colnames(result))
+
+  # Ensure expected columns were correctly transformed
+  expect_true(all(c("a_code", "a_name", "b_code", "b_name", "d_code", "d_name") %in% colnames(result)))
+
+  # Check values
+  expect_equal(result$a_name, factor(c("first", "second")))
+  expect_equal(result$b_name, factor(c("other", "something")))
+  expect_equal(result$d_name, factor(c("category1", "category2")))
+})

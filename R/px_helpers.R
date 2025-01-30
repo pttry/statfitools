@@ -27,39 +27,55 @@ codes2names <- function(.data, codes_names, to_name = TRUE,
 
   if (is.character(to_name)) {
     to_name <- to_name
-  } else if (to_name) {
-    to_name <- names(codes_names)
-  } else if (!to_name) return(.data)
+  } else if (isTRUE(to_name)) {
+    to_name <- intersect(names(codes_names), names(.data))  # Only keep columns that exist in data
+  } else if (isFALSE(to_name)) {
+    return(.data)
+  }
 
-  if (name_suffix == "") stop("name_suffix can not be empty")
+  if (name_suffix == "") stop("name_suffix cannot be empty")
+
+  # Ensure to_name only includes columns that exist in .data
+  valid_to_name <- intersect(to_name, names(.data))
+
+  # Ensure codes_names only includes keys present in .data
+  valid_codes_names <- codes_names[names(codes_names) %in% valid_to_name]
+
+  if (length(valid_to_name) == 0) return(.data)  # If no valid columns, return unchanged
 
   # Add name columns with the specified suffix
   .data <- dplyr::mutate(
     .data,
     across(
-      any_of(to_name) & (where(is.character) | where(is.factor)),
+      any_of(valid_to_name) & (where(is.character) | where(is.factor)),
       ~ factor(
         .x,
-        levels = names(codes_names[[cur_column()]]),
-        labels = codes_names[[cur_column()]]
+        levels = names(valid_codes_names[[cur_column()]]),
+        labels = valid_codes_names[[cur_column()]]
       ),
       .names = paste0("{.col}", name_suffix)
     )
   )
 
   # Rename original code columns with the specified suffix
-  .data <- dplyr::rename_with(
-    .data,
-    .cols = any_of(to_name) & (where(is.character) | where(is.factor)),
-    ~ paste0(.x, code_suffix)
-  )
+  if (code_suffix != "") {
+    .data <- dplyr::rename_with(
+      .data,
+      .cols = any_of(valid_to_name) & (where(is.character) | where(is.factor)),
+      ~ paste0(.x, code_suffix)
+    )
+  }
 
   # Ensure all code columns are factors
-  dplyr::mutate(.data,
-                across(all_of(paste0(to_name, code_suffix)) &
-                         (where(is.character) | where(is.factor)),
-                       ~ forcats::as_factor(.x)))
+  .data <- dplyr::mutate(
+    .data,
+    across(
+      any_of(paste0(valid_to_name, code_suffix)) & (where(is.character) | where(is.factor)),
+      ~ forcats::as_factor(.x)
+    )
+  )
 
+  .data
 }
 
 
