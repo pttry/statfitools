@@ -79,3 +79,37 @@ test_that("codes2names returns unchanged data when to_name is NULL", {
   expect_equal(result, x)
 })
 
+
+test_that("codes2names translates codes to names and keeps original column names when code_suffix is empty", {
+  # Example data
+  x <- data.frame(a = c("a1", "a2"), b = c("b1", "b2"))
+  cn <- list(a = c("a1" = "first", "a2" = "second"),
+             b = c("b1" = "other", "b2" = "something"))
+
+  # Set code_suffix to empty string
+  result <- codes2names(x, cn, code_suffix = "")
+
+  # Check structure: names should be added, but original code columns should not be renamed
+  expect_true("a" %in% colnames(result))  # Original column remains
+  expect_true("b" %in% colnames(result))  # Original column remains
+  expect_true("a_name" %in% colnames(result))  # Name column exists
+  expect_true("b_name" %in% colnames(result))  # Name column exists
+
+  # Check values
+  expect_equal(result$a_name, factor(c("first", "second")))
+  expect_equal(result$b_name, factor(c("other", "something")))
+  expect_equal(result$a, factor(c("a1", "a2")))  # Original column remains unchanged
+  expect_equal(result$b, factor(c("b1", "b2")))  # Original column remains unchanged
+})
+
+test_that("codes2names replaces original columns when name_suffix is empty", {
+  # Example data
+  x <- data.frame(a = c("a1", "a2"), b = c("b1", "b2"))
+  cn <- list(a = c("a1" = "first", "a2" = "second"),
+             b = c("b1" = "other", "b2" = "something"))
+
+  # check that gives an error as name suffix can't be empty. Otherwise it will override code column.
+  expect_error(codes2names(x, cn, name_suffix = ""))
+
+
+})

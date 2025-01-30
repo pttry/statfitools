@@ -18,15 +18,18 @@
 #'            b = c("b1" = "other", "b2" = "something"))
 #' codes2names(x, cn)
 #' codes2names(x, cn, to_name = "a", name_suffix = "_label", code_suffix = "_identifier")
-codes2names <- function(.data, codes_names, to_name = names(codes_names), name_suffix = "_name", code_suffix = "_code") {
+codes2names <- function(.data, codes_names, to_name = names(codes_names),
+                        name_suffix = "_name", code_suffix = "_code") {
 
   if (is.null(to_name)) return(.data)
+
+  if (name_suffix == "") stop("name_suffix can not be empty")
 
   # Add name columns with the specified suffix
   .data <- dplyr::mutate(
     .data,
     across(
-      any_of(to_name) & where(is.character),
+      any_of(to_name) & (where(is.character) | where(is.factor)),
       ~ factor(
         .x,
         levels = names(codes_names[[cur_column()]]),
@@ -39,12 +42,16 @@ codes2names <- function(.data, codes_names, to_name = names(codes_names), name_s
   # Rename original code columns with the specified suffix
   .data <- dplyr::rename_with(
     .data,
-    .cols = any_of(to_name) & where(is.character),
+    .cols = any_of(to_name) & (where(is.character) | where(is.factor)),
     ~ paste0(.x, code_suffix)
   )
 
   # Ensure all code columns are factors
-  dplyr::mutate(.data, across(contains(code_suffix), ~ forcats::as_factor(.x)))
+  dplyr::mutate(.data,
+                across(all_of(paste0(to_name, code_suffix)) &
+                         (where(is.character) | where(is.factor)),
+                       ~ forcats::as_factor(.x)))
+
 }
 
 
