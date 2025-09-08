@@ -133,8 +133,7 @@ trend_series <- function(x, time, method = "seas", ...){
 #'
 #' @param x a numeric vector to smooth.
 #' @param time a date vector.
-#' @param ... additional arguments such as 'span' that the stats::loess function
-#'    takes
+#' @param ... additional arguments such as 'span' to the [stats::loess()] function
 #'
 #' @return numerical vector
 #' @export
@@ -143,7 +142,7 @@ trend_series <- function(x, time, method = "seas", ...){
 loess_series <- function(x, time, ...) {
 
   time <- as.double(time)
-  loess(x ~ time, ...)$fitted
+  predict(loess(x ~ time, ..., na.action = na.exclude))
 
 }
 

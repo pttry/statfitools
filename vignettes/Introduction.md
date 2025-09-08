@@ -1,12 +1,12 @@
 ---
 title: "Introduction to statfitools"
 author: "Janne Huovari"
-date: "2025-01-24"
+date: "2025-09-08"
 output: 
   rmarkdown::html_vignette:
     keep_md: true
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Introduction to statfitools}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -11,8 +11,7 @@ loess_series(x, time, ...)
 
 \item{time}{a date vector.}
 
-\item{...}{additional arguments such as 'span' that the stats::loess function
-takes}
+\item{...}{additional arguments such as 'span' to the [stats::loess()] function}
 }
 \value{
 numerical vector

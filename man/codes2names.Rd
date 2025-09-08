@@ -7,7 +7,7 @@
 codes2names(
   .data,
   codes_names,
-  to_name = names(codes_names),
+  to_name = TRUE,
   name_suffix = "_name",
   code_suffix = "_code"
 )
@@ -18,7 +18,9 @@ codes2names(
 \item{codes_names}{A named (column codes) list of named (codes) vectors (names).
 For example, from [px_code_name()].}
 
-\item{to_name}{A vector of column names to be translated to names. Default is the names from `codes_names`.}
+\item{to_name}{A vector of column names to be translated to names.
+Default (TRUE) is the names from `codes_names`.
+FALSE or NULL just pass `.data`.}
 
 \item{name_suffix}{Suffix to add to name columns. Default is `"_name"`.}
 
